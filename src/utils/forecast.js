@@ -8,7 +8,7 @@ const forecast = (latitude, longitude, callback) => {
     longitude +
     "&units=f";
 
-  http: request({ url, json: true }, (error, { body }) => {
+  request({ url, json: true }, (error, { body }) => {
     if (error) {
       callback("Unable to connect to weather service!", undefined);
     } else if (body.error) {
@@ -21,7 +21,9 @@ const forecast = (latitude, longitude, callback) => {
           body.current.temperature +
           " degrees out. It feels like " +
           body.current.feelslike +
-          " degrees out."
+          " degrees out. The humidity is " +
+          body.current.humidity +
+          "%."
       );
     }
   });
